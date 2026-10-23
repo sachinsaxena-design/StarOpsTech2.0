@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
-import SmoothScroll from '../../dawaraljaddaf-main/src/Model/SmoothScroll.jsx'
+import SmoothScroll from './Component/UI/SmoothScroll.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
