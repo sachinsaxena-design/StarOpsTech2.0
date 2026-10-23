@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import ExpertisePage from "./ExpertisePage/ExpertisePage";
-import EXPERTISE_DATA from "../data/expertise";
-
+import EXPERTISE_DATA from "../../Component/Data/expertise";
 
 export default function ExpertiseDetail() {
   const { slug } = useParams();
