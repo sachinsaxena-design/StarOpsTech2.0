@@ -1,0 +1,42 @@
+{
+  "divyanshu": {
+    "id": 1,
+    "name": "Divyanshu Verma",
+    "email": "divyanshuvermaji@gmail.com",
+    "position": "Frontend Developer StarOps",
+    "profile": "https://cdn.staropstech.com/starops/Blogs/author/divyanshu.png",
+    "link": "https://www.linkedin.com/in/divyanshuan/"
+  },
+  "dewang": {
+    "id": 2,
+    "name": "Dewang Sharma",
+    "email": "dewangsharmads@gmail.com",
+    "position": "DevOps Engineer StarOps",
+    "profile": "https://cdn.staropstech.com/starops/Blogs/author/dewang.jpg",
+    "link": "https://www.linkedin.com/in/dewang-sharma/"
+  },
+  "alkesh": {
+    "id": 3,
+    "name": "Alkesh Tiwari",
+    "email": "alkesh6394@gmail.com",
+    "position": "DevOps Engineer StarOps",
+    "profile": "https://cdn.staropstech.com/starops/Blogs/author/alkesh.png",
+    "link": "https://www.linkedin.com/in/alkesh-tiwari-776763255/"
+  },
+  "ansul": {
+    "id": 4,
+    "name": "Ansul Tiwari",
+    "email": "ansultiwari0007@gmail.com",
+    "position": "DevOps Engineer StarOps",
+    "profile": "https://cdn.staropstech.com/starops/Blogs/author/ansul.png",
+    "link": "https://www.linkedin.com/in/ansul-tiwari-b41495240/"
+  },
+  "sachin":{
+    "id": 5,
+    "name": "Sachin Saxena",
+    "email": "saxenasachin186@gmail.com",
+    "position": "Frontend Developer StarOps",
+    "profile": "https://cdn.staropstech.com/starops/Blogs/author/sachin.jpg",
+    "link":"https://www.linkedin.com/in/sachin-saxena-5ba076246/"
+  }
+}

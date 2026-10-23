@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Letter S Logo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+  :root{
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:inherit;}
+  html,body{
+    height:100%;
+    margin:0;
+    background:#0E0F12;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .tile{
+    position:relative;
+    width:min(70vw,320px);
+    aspect-ratio:1/1;
+    background:#17181C;
+    border-radius:22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 30px 60px rgba(0,0,0,0.45);
+    overflow:hidden;
+  }
+  .corner{
+    position:absolute;
+    top:0; right:0;
+    width:0; height:0;
+    border-style:solid;
+    border-width:0 34px 34px 0;
+    border-color:transparent #3B82F6 transparent transparent;
+    opacity:0.9;
+  }
+  .letter{
+    font-family:'Alex Brush', cursive;
+    font-size:min(38vw,180px);
+    line-height:1;
+    color:#F5F5F5;
+    transform:translate(2%, 4%);
+    user-select:none;
+  }
+</style>
+</head>
+<body>
+  <div class="tile">
+    <div class="corner"></div>
+    <span class="letter">S</span>
+  </div>
+</body>
+</html>
