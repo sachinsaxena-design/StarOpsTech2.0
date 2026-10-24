@@ -19,6 +19,10 @@ import portfolio from '../assets/portfolio.png'
 import gallery from '../assets/gallery.png'
 import { Link, useLocation } from "react-router-dom";
 
+// Pages with a WHITE hero where the navbar text must be dark until you scroll.
+// Add more routes here if needed, e.g. ["/contact-us", "/privacy-policy"]
+const LIGHT_HERO_ROUTES = ["/contact-us"];
+
 // [icon key, title, description, href]
 // Service hrefs are the URLs of the service pages: /services/<slug>
 // (slugs must match the keys in src/data/services/index.js)
@@ -120,6 +124,11 @@ export default function Navbar() {
   const [feat, setFeat] = useState(false); // mobile "Features" accordion
   const [ddHide, setDdHide] = useState(false); // desktop mega menu: hidden after a click until the mouse leaves
 
+  // white-hero pages: dark text at the top, switches to white once the navbar turns solid (dark)
+  const cleanPath = path.length > 1 ? path.replace(/\/$/, "") : path;
+  const lightHero = LIGHT_HERO_ROUTES.includes(cleanPath);
+  const light = lightHero && !solid && !open;
+
   const close = () => {
     setOpen(false);
     setFeat(false);
@@ -141,7 +150,7 @@ export default function Navbar() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [path]); // re-check on route change so the colour is right on arrival
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -165,7 +174,7 @@ export default function Navbar() {
     <>
       <style>{css}</style>
 
-      <header className={`so-header ${solid || open ? "so-solid" : ""}`}>
+      <header className={`so-header ${solid || open ? "so-solid" : ""} ${light ? "so-light" : ""}`}>
         <div className="so-left">
           <Link to="/" aria-label="StarOps home" onClick={close}>
             <img src={logo} alt="StarOps" className="w-16" />
@@ -201,7 +210,7 @@ export default function Navbar() {
                     </div>
                   </div>
                   <div className="so-foot">
-                    <NavItem href="/contact" onClick={onDesktopNavigate}>
+                    <NavItem href="/contact-us" onClick={onDesktopNavigate}>
                       Contact Us
                       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12h14M13 6l6 6-6 6" />
@@ -214,9 +223,8 @@ export default function Navbar() {
           </nav>
         </div>
 
-        <Link className="so-pill" to="/contact">Contact Us</Link>
+        <Link className="so-pill" to="/contact-us">Contact Us</Link>
 
-        {/* ---------- HAMBURGER (mobile / tablet) ---------- */}
         <button
           type="button"
           className={`so-burger ${open ? "so-burger-open" : ""}`}
@@ -229,7 +237,6 @@ export default function Navbar() {
         </button>
       </header>
 
-      {/* ---------- MOBILE MENU ---------- */}
       <div id="so-mobile" className={`so-mobile ${open ? "so-open" : ""}`} aria-hidden={!open}>
         <ul className="so-m-list">
           <li>
@@ -286,7 +293,7 @@ export default function Navbar() {
           </li>
         </ul>
 
-        <Link className="so-m-cta" to="/contact" onClick={close}>
+        <Link className="so-m-cta" to="/contact-us" onClick={close}>
           Contact Us
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M5 12h14M13 6l6 6-6 6" />
@@ -299,7 +306,7 @@ export default function Navbar() {
 
 const css = `
 /* ============ HEADER ============ */
-.so-header{display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 16px;height:76px;position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(5,6,10,0);transition:background-color .5s cubic-bezier(.4,0,.2,1),height .5s cubic-bezier(.4,0,.2,1),box-shadow .5s ease,backdrop-filter .5s ease,-webkit-backdrop-filter .5s ease;color:#fff;font-family:Inter,"Helvetica Neue",Arial,sans-serif;box-sizing:border-box}
+.so-header{display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 16px;height:76px;position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(5,6,10,0);transition:background-color .5s cubic-bezier(.4,0,.2,1),height .5s cubic-bezier(.4,0,.2,1),box-shadow .5s ease,backdrop-filter .5s ease,-webkit-backdrop-filter .5s ease,color .4s ease;color:#fff;font-family:Inter,"Helvetica Neue",Arial,sans-serif;box-sizing:border-box}
 .so-header *,.so-mobile,.so-mobile *{box-sizing:border-box}
 .so-header.so-solid{height:62px;background:rgba(5,6,10,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(255,255,255,.08),0 10px 30px rgba(0,0,0,.35)}
 .so-left{display:flex;align-items:center;gap:28px}
@@ -307,15 +314,27 @@ const css = `
 
 /* ============ DESKTOP NAV ============ */
 .so-header nav ul{display:flex;align-items:center;gap:8px;list-style:none;margin:0;padding:0}
-.so-header nav a{color:#fff;text-decoration:none;font-size:15px;font-weight:500}
-.so-header nav a.so-link{padding:8px 16px;border-radius:999px;transition:background .25s,color .25s,transform .25s}
+.so-header nav a{color:#fff;text-decoration:none;font-size:15px;font-weight:500;transition:color .4s ease}
+.so-header nav a.so-link{padding:8px 16px;border-radius:999px;transition:background .25s,color .4s,transform .25s}
 .so-header nav a.so-link:hover{background:#fff;color:#05060a;transform:translateY(-1px)}
 .so-header nav a.so-link.so-active{background:rgba(255,255,255,.15)}
 .so-header nav a.so-link.so-active:hover{background:#fff}
 .so-trigger{display:flex;align-items:center;gap:5px;cursor:pointer;padding:24px 16px}
-.so-trigger svg{transition:transform .2s}
+.so-trigger svg{transition:transform .2s,stroke .4s ease}
 .so-has-dd:hover .so-trigger svg{transform:rotate(180deg)}
-.so-pill{background:#fff;color:#000;border-radius:999px;padding:10px 18px;font-size:15px;text-decoration:none;white-space:nowrap}
+.so-pill{background:#fff;color:#000;border-radius:999px;padding:10px 18px;font-size:15px;text-decoration:none;white-space:nowrap;transition:background-color .4s ease,color .4s ease}
+
+/* ---- white-hero pages (e.g. /contact-us): dark text until the navbar turns solid ---- */
+.so-header.so-light{color:#07090d}
+.so-header.so-light nav a{color:#07090d}
+.so-header.so-light nav a.so-link:hover{background:#07090d;color:#fff}
+.so-header.so-light nav a.so-link.so-active{background:rgba(7,9,13,.08)}
+.so-header.so-light nav a.so-link.so-active:hover{background:#07090d}
+.so-header.so-light .so-trigger svg{stroke:#07090d}
+.so-header.so-light .so-pill{background:#07090d;color:#fff}
+.so-header.so-light .so-burger{background:rgba(7,9,13,.06)}
+.so-header.so-light .so-burger:hover{background:rgba(7,9,13,.12)}
+.so-header.so-light .so-burger span{background:#07090d}
 
 /* mega menu */
 .so-mega{position:fixed;top:48px;left:40px;width:min(960px,calc(100vw - 80px));max-height:calc(100vh - 56px);overflow:auto;background:#fff;color:#111;border-radius:24px;padding:18px 20px 16px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .2s,transform .2s,visibility .2s;box-shadow:0 20px 60px rgba(0,0,0,.5)}
@@ -346,7 +365,7 @@ const css = `
 /* ============ HAMBURGER (hidden on desktop) ============ */
 .so-burger{display:none;position:relative;width:44px;height:44px;margin-right:4px;border:0;border-radius:50%;background:rgba(255,255,255,.1);cursor:pointer;padding:0;transition:background .25s}
 .so-burger:hover{background:rgba(255,255,255,.18)}
-.so-burger span{position:absolute;left:12px;right:12px;height:2px;border-radius:2px;background:#fff;transition:transform .35s cubic-bezier(.4,0,.2,1),opacity .2s ease,top .35s cubic-bezier(.4,0,.2,1)}
+.so-burger span{position:absolute;left:12px;right:12px;height:2px;border-radius:2px;background:#fff;transition:transform .35s cubic-bezier(.4,0,.2,1),opacity .2s ease,top .35s cubic-bezier(.4,0,.2,1),background-color .4s ease}
 .so-burger span:nth-child(1){top:15px}
 .so-burger span:nth-child(2){top:21px}
 .so-burger span:nth-child(3){top:27px}

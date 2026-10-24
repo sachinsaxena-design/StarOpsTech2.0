@@ -19,6 +19,7 @@ import ReviewSection from "./Section/ReviewSection"
 import RecentsBlogs from './Common/RecentsBlogs'
 import recentblogsdata from "./Data/blog/blogs.json";
 import ContactUs from "./Section/ContactUsSections";
+import { Link } from "react-router-dom";
 const VIDEO_URL = "YOUR_VIDEO_LINK_HERE";
 
 const SERVICES = [
@@ -72,14 +73,14 @@ export default function Hero() {
                 </li>
               ))}
             </ul>
-            <a href="/contact" className="hero-cta">
+            <Link to="/contact-us" className="hero-cta">
               Let's work together
               <span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
               </span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>

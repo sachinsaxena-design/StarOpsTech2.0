@@ -1,9 +1,10 @@
+import React, { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import teamImg from "../../assets/cardimage.jpg";
 import leadImg from "../../assets/boy.png";
-import React, { useEffect, useRef } from "react";
 // Replace these with your own images
 
-/* Usage: <Navbar /> <Hero /> <AboutIntro />
+/* Usage: <Navbar /> <Hero /> <AboutSection />
    Script font: add to your index.html <head>:
    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet"> */
 
@@ -12,6 +13,13 @@ const TEXT =
 
 // words styled in the handwritten/script font (as in your reference)
 const SCRIPT_WORDS = ["technology,", "innovation."];
+
+// "Discuss your projects" opens WhatsApp with this message pre-filled.
+// Number = country code + number, digits only (no +, spaces or dashes).
+const WHATSAPP_NUMBER = "917530882800";
+const WHATSAPP_MESSAGE =
+  "Hi StarOps team, I came across your website and would like to discuss a project. Could we set up a quick call?";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
@@ -40,13 +48,8 @@ export default function AboutSection() {
       if (!sec) return;
       const r = sec.getBoundingClientRect();
       const total = r.height - window.innerHeight;
-      // start revealing while the section is still entering the screen
-      // (0.55 = when the section top is 55% down the viewport), so the first
-      // words are already visible when the three labels appear
       const START = window.innerHeight * 0.55;
-      // 1 just before the sticky area releases
       const p = reduce ? 1 : clamp((START - r.top) / (total + START) / 0.9);
-      // each word takes ~2.5 words of scroll to go from hidden+blurry to sharp
       const SPAN = 2.5;
       const lit = p * (words.length + SPAN);
       wordRefs.current.forEach((el, i) => {
@@ -109,7 +112,7 @@ export default function AboutSection() {
         <div className="ai-reviews">
           <div className="ai-review">
             <div className="ai-logo">
-              <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M19 8.5A8 8 0 1 0 19 15.5" stroke="#111" strokeWidth="3.2" strokeLinecap="round" />
                 <circle cx="12" cy="12" r="2.6" fill="#e8322c" />
               </svg>
@@ -122,7 +125,7 @@ export default function AboutSection() {
           <div className="ai-divider" />
           <div className="ai-review">
             <div className="ai-logo">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="#111">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="#111" aria-hidden="true">
                 <path d="M12 1c.6 6.4 4.6 10.4 11 11-6.4.6-10.4 4.6-11 11-.6-6.4-4.6-10.4-11-11C7.4 11.4 11.4 7.4 12 1z" />
               </svg>
             </div>
@@ -137,7 +140,15 @@ export default function AboutSection() {
           <div className="ai-img">
             <img src={teamImg} alt="Our team" />
           </div>
-          <a href="/contact" className="ai-chip">
+
+          {/* opens WhatsApp with a ready-made message (visitor just taps Send) */}
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ai-chip"
+            aria-label="Discuss your projects on WhatsApp"
+          >
             <span className="ai-av">
               <img className="ai-avatar" src={leadImg} alt="Team lead" />
               <em className="ai-dot" />
@@ -165,14 +176,14 @@ export default function AboutSection() {
           solve real problems, drive growth, and make an impact.
         </p>
 
-        <a href="/contact" className="ai-btn">
+        <Link to="/contact-us" className="ai-btn">
           Contact Us
           <span>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>
           </span>
-        </a>
+        </Link>
       </section>
     </>
   );

@@ -8,6 +8,7 @@ import ServiceDetails from './Component/Pages/ServiceDetail'
 import ExpertiseDetail from './Component/Pages/ExpertiseDetails'
 import BlogMainPages from './Component/Blog/BlogMainPage'
 import BlogLayout from './Component/Blog/BlogLayout'
+import ContactUsPage from './Component/Pages/ContactUsPage'
 function App() {
 
 
@@ -22,6 +23,7 @@ function App() {
           <Route exact path='/about-us' element={
             <AboutUs />
           } />
+          <Route exact path='/contact-us' element={<ContactUsPage/>}/>
           <Route exact path='/services/:slug' element={<ServiceDetails />} />
           <Route exact path='/expertise/:slug' element={<ExpertiseDetail />} />
           <Route path="/blog" element={<BlogMainPages />} />
