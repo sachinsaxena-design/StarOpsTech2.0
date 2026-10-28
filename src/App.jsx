@@ -9,12 +9,14 @@ import ExpertiseDetail from './Component/Pages/ExpertiseDetails'
 import BlogMainPages from './Component/Blog/BlogMainPage'
 import BlogLayout from './Component/Blog/BlogLayout'
 import ContactUsPage from './Component/Pages/ContactUsPage'
+import ScrollToTop from './Component/ScrollToTop'
 function App() {
 
 
   return (
     <>
       <Router>
+        <ScrollToTop/>
         <Navbar />
         <Routes>
           <Route exact path='/' element={
