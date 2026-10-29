@@ -1,5 +1,5 @@
 import nextjsimg from '../../../assets/nextjsimg.jpg'
-import nextjsicon from '../../../assets/nextjs-icon-1.svg'
+import nextjsicon from '../../../assets/nextjs2.png'
 const heroImg = nextjsimg;
 const introImg = nextjsicon;
 

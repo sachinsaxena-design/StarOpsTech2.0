@@ -2,7 +2,7 @@ import React from "react";
 
 /* Usage: <Navbar /> then <Hero /> at the top of your page.
    Put your video link below (a direct .mp4 / .webm URL or an imported file). */
-import bgvideo from '../assets/bg-video.mp4';
+import bgvideo from '../assets/bg-video-1.mp4';
 import AboutSection from "./Section/AboutSection";
 import ServicesSection from "./Section/ServiceSection";
 import IdeaSection from "./Section/IdeaSection";
